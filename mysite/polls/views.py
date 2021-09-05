@@ -1,8 +1,8 @@
 from django.shortcuts import render
 
 # Create your views here.
-from django.http import HttpResponseRedirect
-from django.shortcuts import get_list_or_404, get_object_or_404, render
+from django.http import HttpResponseRedirect, HttpResponse
+from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 
 from .models import Question, Choice
@@ -15,7 +15,7 @@ def index(request):
 
 
 def detail(request, question_id):
-    question = get_list_or_404(Question, pk=question_id)
+    question = question = get_object_or_404(Question, pk=question_id)
     return render(request, 'polls/detail.html', {'question': question})
 
 
