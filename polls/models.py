@@ -7,7 +7,16 @@ from django.utils import timezone
 
 class Question(models.Model):
     question_text = models.CharField(max_length=200)
-    pub_date = models.DateTimeField("date published")
+    pub_date = models.DateTimeField('date published')
+    end_date = models.DateTimeField('date published')
+
+    def is_publish(self):
+        if timezone.now() >= self.pub_date:
+            return True
+
+    def can_vote(self):
+        if self.is_publish() and timezone.now() < self.end_date:
+            return True
 
     def __str__(self) -> str:
         return self.question_text
