@@ -15,10 +15,8 @@
         <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
         <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
         {% endfor %}
-        <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-            <input class="btn btn-outline-success" type="submit" value="Vote">
-            <a class="btn btn-outline-danger" href="{% url 'polls:index' %}" role="button">Back</a>
-        </div>
+        <input class="btn btn-outline-success" type="submit" value="Vote">
+        <a class="btn btn-outline-danger" href="{% url 'polls:index' %}" role="button">Back to List of Polls</a>
     </form>
 </ul>
 {% else %}
