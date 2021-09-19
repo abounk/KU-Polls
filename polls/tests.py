@@ -36,6 +36,39 @@ class QuestionModeltests(TestCase):
         recent_question = Question(pub_date=time)
         self.assertIs(recent_question.was_published_recently(), True)
 
+    def test_is_published(self):
+        """
+        is_published() returns True if current date is on or after question’s publication date.
+        """
+        time = timezone.now()
+        question = Question(pub_date=time)
+        self.assertTrue(question.is_published())
+
+        # after pub_date
+        question = Question(pub_date=(time - datetime.timedelta(days=1)))
+        self.assertTrue(question.is_published())
+
+        # before pub_date
+        question = Question(pub_date=(time + datetime.timedelta(days=1)))
+        self.assertFalse(question.is_published())
+
+    def test_can_vote(self):
+        """
+        can_vote() returns True if voting is currently allowed for this question.
+        """
+        time = timezone.now()
+        question = Question(pub_date=time, end_date=time +
+                            datetime.timedelta(hours=1))
+        self.assertTrue(question.can_vote())
+        question = Question(pub_date=time - datetime.timedelta(days=1),
+                            end_date=time + datetime.timedelta(days=1))
+        self.assertTrue(question.can_vote())
+        question = Question(pub_date=time + datetime.timedelta(hours=1))
+        self.assertFalse(question.can_vote())
+        question = Question(
+            pub_date=time - datetime.timedelta(days=1), end_date=time)
+        self.assertFalse(question.can_vote())
+
 
 def create_question(question_text, days):
     """
@@ -44,7 +77,7 @@ def create_question(question_text, days):
     in the past, positive for questions that have yet to be published).
     """
     time = timezone.now() + datetime.timedelta(days=days)
-    return Question.objects.create(question_text=question_text, pub_date=time)
+    return Question.objects.create(question_text=question_text, pub_date=time, end_date=time + timezone.timedelta(days=1))
 
 
 class QuestionIndexViewTests(TestCase):
