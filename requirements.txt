@@ -3,3 +3,4 @@ coverage
 python-decouple
 django==3.2.6
 flake8
+bootstrap
