@@ -22,7 +22,7 @@ class Question(models.Model):
             return True
 
     def can_vote(self):
-        """ Check whether the question is available 
+        """ Check whether the question is available
         to be vote or not.
 
         Returns:
