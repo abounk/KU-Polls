@@ -6,15 +6,28 @@ from django.utils import timezone
 
 
 class Question(models.Model):
+    """ A object contains set of questions and choices. """
+
     question_text = models.CharField(max_length=200)
     pub_date = models.DateTimeField('date published')
     end_date = models.DateTimeField('end date')
 
     def is_published(self):
+        """ Check whether the question is published or not.
+
+        Returns:
+            bool: Returns True if the question is published.
+        """
         if timezone.now() >= self.pub_date:
             return True
 
     def can_vote(self):
+        """ Check whether the question is available 
+        to be vote or not.
+
+        Returns:
+            bool: Returns True if the question can be vote.
+        """
         if self.is_published() and timezone.now() < self.end_date:
             return True
 
@@ -22,6 +35,12 @@ class Question(models.Model):
         return self.question_text
 
     def was_published_recently(self):
+        """ Check if the question was published today or not.
+
+        Returns:
+            bool: Returns True if the question was published within this day
+            , else False.
+        """
         now = timezone.now()
         return now - datetime.timedelta(days=1) <= self.pub_date <= now
     was_published_recently.admin_order_field = 'pub_date'
@@ -30,6 +49,8 @@ class Question(models.Model):
 
 
 class Choice(models.Model):
+    """ Store choice's object """
+
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     choice_text = models.CharField(max_length=200)
     votes = models.IntegerField(default=0)

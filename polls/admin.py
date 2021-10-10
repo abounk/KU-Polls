@@ -4,11 +4,14 @@ from .models import Choice, Question
 
 
 class ChoiceInline(admin.StackedInline):
+    """ Limit the number of choices to be shown in a line. """
     model = Choice
     extra = 3
 
 
 class QuestionAdmin(admin.ModelAdmin):
+    """ Allow admin to edit poll questions. """
+
     fieldsets = [
         (None,               {'fields': ['question_text']}),
         ('Date information', {'fields': [
