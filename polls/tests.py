@@ -11,7 +11,7 @@ from .models import Question
 class QuestionModeltests(TestCase):
     def test_was_published_recently_with_future_question(self):
         """
-        was_published_recently() returns False for 
+        was_published_recently() returns False for
         questions whose pub_date is in the future.
         """
         time = timezone.now() + datetime.timedelta(days=30)
@@ -32,13 +32,15 @@ class QuestionModeltests(TestCase):
         was_published_recently() returns True for questions whose pub_date
         is within the last day.
         """
-        time = timezone.now() - datetime.timedelta(hours=23, minutes=59, seconds=59)
+        time = timezone.now() - \
+            datetime.timedelta(hours=23, minutes=59, seconds=59)
         recent_question = Question(pub_date=time)
         self.assertIs(recent_question.was_published_recently(), True)
 
     def test_is_published(self):
         """
-        is_published() returns True if current date is on or after question’s publication date.
+        is_published() returns True if current date is
+        on or after question’s publication date.
         """
         time = timezone.now()
         question = Question(pub_date=time)
@@ -54,7 +56,8 @@ class QuestionModeltests(TestCase):
 
     def test_can_vote(self):
         """
-        can_vote() returns True if voting is currently allowed for this question.
+        can_vote() returns True if voting is currently allowed
+        for this question.
         """
         time = timezone.now()
         question = Question(pub_date=time, end_date=time +
@@ -77,7 +80,8 @@ def create_question(question_text, days):
     in the past, positive for questions that have yet to be published).
     """
     time = timezone.now() + datetime.timedelta(days=days)
-    return Question.objects.create(question_text=question_text, pub_date=time, end_date=time + timezone.timedelta(days=1))
+    return Question.objects.create(question_text=question_text, pub_date=time,
+                                   end_date=time + timezone.timedelta(days=1))
 
 
 class QuestionIndexViewTests(TestCase):
