@@ -32,8 +32,8 @@ class QuestionModeltests(TestCase):
         was_published_recently() returns True for questions whose pub_date
         is within the last day.
         """
-        time = timezone.now() - \
-            datetime.timedelta(hours=23, minutes=59, seconds=59)
+        time = timezone.now() - datetime.timedelta(
+            hours=23, minutes=59, seconds=59)
         recent_question = Question(pub_date=time)
         self.assertIs(recent_question.was_published_recently(), True)
 
@@ -81,7 +81,7 @@ def create_question(question_text, days):
     """
     time = timezone.now() + datetime.timedelta(days=days)
     return Question.objects.create(question_text=question_text, pub_date=time,
-                                   end_date=time + timezone.timedelta(days=1))
+                                   end_date=time + timezone.timedelta(days=10))
 
 
 class QuestionIndexViewTests(TestCase):
