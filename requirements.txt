@@ -1,2 +1,5 @@
 # required packages
 coverage
+python-decouple
+django
+flake8
