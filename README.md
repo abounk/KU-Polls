@@ -3,4 +3,11 @@
 
 # KU Polls
 This project is all about Django application for conducting a poll or survey.    
-For more information >> [Wiki Home](../../wiki/Home)
+
+# Wiki
+[Wiki Home](../../wiki/Home)    
+
+# Plan
+[Iteration 1](../../wiki/Iteration-1-Plan)    
+[Iteration 2](../../wiki/Iteration-2-Plan)
+
