@@ -49,6 +49,10 @@ class Question(models.Model):
     was_published_recently.boolean = True
     was_published_recently.short_description = 'Published recently?'
 
+    is_published.admin_order_field = 'pub_date'
+    is_published.boolean = True
+    is_published.short_description = 'Published recently?'
+
 
 class Choice(models.Model):
     """ Store choice's object """
