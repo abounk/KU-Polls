@@ -6,13 +6,17 @@
 </div>
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-{% if question.can_vote%}
+{% if question.can_vote %}
 <ul>
     <h1>{{ question.question_text }}</h1>
     <form action="{% url 'polls:vote' question.id %}" method="post">
         {% csrf_token %}
         {% for choice in question.choice_set.all %}
+        {% if previous_vote.choice == choice %}
+        <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}" checked>
+        {% else %}
         <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+        {% endif %}
         <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
         {% endfor %}
         <input class="btn btn-outline-success" type="submit" value="Vote">
