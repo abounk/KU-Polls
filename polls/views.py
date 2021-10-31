@@ -38,15 +38,17 @@ class DetailView(generic.DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        previous_vote = None
         user = self.request.user
         if user.is_authenticated:
             try:
-                vote = Vote.objects.get(user=user,
-                                        choice__question=context["question"])
+                previous_vote = Vote.objects.get(user=user,
+                                                 choice__question=context["question"])
             except Vote.DoesNotExist:
                 pass
 
-        context["vote"] = vote
+        if previous_vote:
+            context["previous_vote"] = previous_vote
         return context
 
 
