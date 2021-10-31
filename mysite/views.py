@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import login, authenticate, user_logged_in, user_logged_out, user_login_failed
+from django.contrib.auth import login, authenticate, user_login_failed
+from django.contrib.auth import user_logged_in, user_logged_out
 from django.contrib.auth.forms import UserCreationForm
 
 from django.http import HttpRequest

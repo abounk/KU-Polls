@@ -21,7 +21,8 @@ class IndexView(generic.ListView):
         Return the last five published questions (not including those set to be
         published in the future).
         """
-        return Question.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:5]
+        return Question.objects.filter(pub_date__lte=timezone.now())\
+            .order_by('-pub_date')[:5]
 
 
 class DetailView(generic.DetailView):
@@ -42,8 +43,8 @@ class DetailView(generic.DetailView):
         user = self.request.user
         if user.is_authenticated:
             try:
-                previous_vote = Vote.objects.get(user=user,
-                                                 choice__question=context["question"])
+                previous_vote = Vote.objects.\
+                    get(user=user, choice__question=context["question"])
             except Vote.DoesNotExist:
                 pass
 
