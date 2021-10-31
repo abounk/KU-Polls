@@ -7,6 +7,7 @@ from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 
 from .models import Choice, Question, Vote
+import logging
 
 
 class IndexView(generic.ListView):
@@ -69,6 +70,8 @@ def vote(request, question_id):
             # cases 2: user has already voted
             #          Modify the existing vote and save it
             vote.choice = selected_choice
+        logger = logging.getLogger("polls")
+        logger.info(f"{user} votes for {vote.choice} in {question}.")
         vote.save()
         # Always return an HttpResponseRedirect after successfully dealing
         # with POST data. This prevents data from being posted twice if a
