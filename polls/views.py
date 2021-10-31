@@ -81,7 +81,7 @@ def get_vote_for_user(user, poll_question):
     """Find and return an existing vote for a user on a poll question.
 
     Returns:
-        The user;s Vote or None if no vote for this poll_question
+        The users Vote or None if no vote for this poll_question
     """
     try:
         vote = Vote.objects.filter(user=user)\
