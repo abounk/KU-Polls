@@ -11,3 +11,11 @@ This project is all about Django application for conducting a poll or survey.
 [Iteration 1](../../wiki/Iteration-1-Plan)    
 [Iteration 2](../../wiki/Iteration-2-Plan)
 
+## Running KU Polls
+
+Users provided by the initial data (users.json):
+
+| Username  | Password    |
+|-----------|-------------|
+| demo1     | Vote4me1    |
+| demo2     | Vote4me2    |
