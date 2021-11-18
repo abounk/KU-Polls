@@ -13,10 +13,7 @@ def signup(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            raw_passwd = form.cleaned_data.get('password')
-            user = authenticate(username=username, password=raw_passwd)
+            user = form.save()
             login(request, user)
             return redirect('polls')
         # what if form is not valid?
@@ -52,11 +49,11 @@ def login_log(request, user, **kwargs):
 
 
 @receiver(user_login_failed)
-def unsuccess_login_log(request, user, **kwargs):
+def unsuccess_login_log(request, **kwargs):
     """logger for unsuccessful login"""
     user_ip = get_ip_address(request)
     logger.warning(
-        f"Invalid login for {user.username} with IP address: {user_ip}")
+        f"Invalid login for {request.user.username} with IP address: {user_ip}")
 
 
 @receiver(user_logged_out)
