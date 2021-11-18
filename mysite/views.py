@@ -53,7 +53,7 @@ def unsuccess_login_log(request, **kwargs):
     """logger for unsuccessful login"""
     user_ip = get_ip_address(request)
     logger.warning(
-        f"Invalid login for {request.user.username} with IP address: {user_ip}")
+        f"Invalid login with IP address: {user_ip}")
 
 
 @receiver(user_logged_out)
