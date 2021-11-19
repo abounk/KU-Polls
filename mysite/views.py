@@ -15,7 +15,7 @@ def signup(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect('polls')
+            return redirect('/polls/')
         # what if form is not valid?
         # we should display a message in signup.html
     else:
