@@ -18,5 +18,5 @@ Users provided by the initial data (users.json):
 
 | Username  | Password    |
 |-----------|-------------|
-| Demo1     | Vote4me!    |
-| Demo2     | Vote4me2    |
+| Demo1     | Voteforme!    |
+| Demo2     | Voteforme2    |
